@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import RandomWordDisplay from "./components/RandomWordDisplay";
 import FilterControls, { type Filters } from "./components/FilterControls";
 import SortControls from "./components/SortControls";
 import WordList from "./components/WordList";
@@ -32,6 +33,7 @@ function App() {
   const [filteredWords, setFilteredWords] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState<string>("alpha-asc");
+  const [randomWord, setRandomWord] = useState<string | null>(null);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -154,6 +156,16 @@ function App() {
 
   const resetAllFilters = () => setFilters(initialFilters);
 
+  const handleGetRandomWord = () => {
+    if (sortedWords.length == 0) return;
+    const randomIndex = Math.floor(Math.random() * sortedWords.length);
+    setRandomWord(sortedWords[randomIndex]);
+  };
+
+  const dismissRandomWord = () => {
+    setRandomWord(null);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white dark:bg-slate-900 flex flex-col justify-center items-center text-gray-600 dark:text-gray-300">
@@ -201,7 +213,17 @@ function App() {
             onSortChange={setSortOrder}
             filteredCount={filteredWords.length}
             totalCount={allWords.length}
+            onGetRandomWord={handleGetRandomWord}
           />
+
+          {/* Conditionally render random word */}
+          {randomWord && (
+            <RandomWordDisplay
+              word={randomWord}
+              onDismiss={dismissRandomWord}
+            />
+          )}
+
           <WordList words={paginatedWords} />
           <Pagination
             currentPage={currentPage}
