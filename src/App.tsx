@@ -191,7 +191,7 @@ function App() {
           <div className="flex-1 text-center">
             <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-gray-100 flex items-center justify-center">
               <BookOpenText className="w-10 h-10 sm:w-12 sm:h-12 mr-4 text-indigo-600 dark:text-indigo-500" />
-              Word Finder
+              Vocab Vault
             </h1>
           </div>
           <div className="flex-1 flex justify-end">
@@ -232,6 +232,8 @@ function App() {
           />
         </div>
       </main>
+
+      <footer className="mt-10 pb-5 text-center">Made with love by Roy</footer>
     </div>
   );
 }
