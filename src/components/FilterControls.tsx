@@ -27,7 +27,7 @@ const FilterControls: React.FC<FilterControlsProps> = ({
 
     if (
       (name === "contains" || name === "notContaining") &&
-      (value.length > 5 || !/^[a-zA-Z]*$/.test(value))
+      !/^[a-zA-Z]*$/.test(value)
     ) {
       return;
     }
@@ -72,14 +72,12 @@ const FilterControls: React.FC<FilterControlsProps> = ({
             name="contains"
             value={filters.contains}
             onChange={handleInputChange}
-            maxLength={5}
           />
           <InputField
             label="Not containing (any of)"
             name="notContaining"
             value={filters.notContaining}
             onChange={handleInputChange}
-            maxLength={5}
           />
 
           <div>
